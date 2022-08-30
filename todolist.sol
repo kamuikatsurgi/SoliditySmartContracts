@@ -33,12 +33,27 @@ contract todolist {
     function completeTask(uint _num_task) public onlyOwner{
         todo[_num_task].status = true;
     }
-    function viewTask(uint _id) public view returns(string memory){
+    function viewTaskFromitsId(uint _id) public view returns(string memory){
         return todo[_id].todotask;
     }
-/*    function viewTask(uint _id) public view returns(Task memory){
+/*  function viewTask(uint _id) public view returns(Task memory){
         return todo[_id];
         For future refrence: the above function will retrun a whole struct but in form of a tuple.
     }*/
+    function viewTaskFromitsName(string memory _todo) public view returns(uint){
+        uint i=1;
+        /*In solidity there is no such thing to compare strings and == operator is not compatible with strings.
+        So if we want to compare two string what we can do is check there hash and if both the strings are equal there hash
+        would also be equal*/
+        //And kessak-256 is ethereum's native hasing algorithm
+        while(i<=num_task-1){
+            if(keccak256(abi.encodePacked(_todo)) == keccak256(abi.encodePacked(todo[i].todotask))){
+                return i;
+                break;
+            }
+            else{
+                i=i+1;
+            }
+        }
+    }
 }
-
