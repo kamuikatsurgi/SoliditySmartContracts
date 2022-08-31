@@ -13,4 +13,8 @@ contract FavouriteCricketer{
     function getCricketer() public view returns(string memory){
         return cricketer;
     }
+
+    function getrandomFromFavCricketer(string memory _fav) public view returns(uint){
+        return uint(keccak256(abi.encodePacked(_fav)));
+    }
 }
