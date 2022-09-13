@@ -20,11 +20,7 @@ contract todolist{
     mapping (uint => Task) public todo;
 
     modifier onlyOwner(){
-        require(
-            manager == msg.sender
-            ,
-            "Only the owner is allowed to make changes"
-        );
+        require(manager == msg.sender,"Only the owner is allowed to make changes");
         _;
     }
 
